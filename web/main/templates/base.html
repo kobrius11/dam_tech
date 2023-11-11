@@ -23,7 +23,7 @@
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
         </ul>
         {% endif %}
@@ -36,6 +36,5 @@
         <p>&copy; {% now "Y" %} Your Website Name</p>
         <!-- Add footer content here -->
     </footer>
-    <!-- Add your JavaScript and other script includes here -->
 </body>
 </html>

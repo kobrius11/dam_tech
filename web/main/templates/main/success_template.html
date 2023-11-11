@@ -2,6 +2,15 @@
 
 {% block content %}
 
-<p>{{ field1 }}</p>
+<p>
+    Šiuo atveju būtų pritaikytas {{ worker_advantage }}% pelno mokesčio lengvatos dydis.
+    {% if result < 50 %}
+    Jei norite pasinaudoti didesniu lengvatos dydžiu, turėtumėte:
+    
+    
+    
+    worker percent: {{ worker_percent }}%, 
+    advantage: {{ worker_advantage }}%, 
+    kiek darbuotoju idarbint iki kito lengvatos lygio: {{ x }}</p>
 
 {% endblock %}

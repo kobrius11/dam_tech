@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import FormView, View
-from . import forms
+from . import forms, utils
 
 # Create your views here.
 def index(request):
@@ -20,12 +20,12 @@ class FormView(View):
         form = forms.Form(request.POST)
         if form.is_valid():
             # Process the form data as needed
-            field1_value = form.cleaned_data['input_int']
-            #field2_value = form.cleaned_data['field2']
+            field1_value = form.cleaned_data['input_d_int']
+            field2_value = form.cleaned_data['input_rd_int']
 
             request.session['form_data'] = {
-                'field1': field1_value,
-                # 'field2': field2_value,
+                'darbuotoju_int': field1_value,
+                'riboto_int': field2_value,
             }
 
             # Redirect to another URL with the form data
@@ -37,8 +37,11 @@ class FormView(View):
 def success_page(request):
     # Do something with the form data
     form_data = request.session.get('form_data', {})
-    field1_value = form_data.get('field1', '')
-    # field2_value = form_data.get('field2', '')
+    field1_value = int(form_data.get('darbuotoju_int', ''))
+    field2_value = int(form_data.get('riboto_int', ''))
 
-    context = {'field1': field1_value, 'field2': None}
+
+    result, advantage, x = utils.get_worker_percent(field1_value, field2_value)
+
+    context = {'worker_percent': result, 'worker_advantage': advantage, 'x': x}
     return render(request, 'main/success_template.html', context)
